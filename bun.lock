@@ -4,6 +4,7 @@
     "": {
       "name": "mcking",
       "dependencies": {
+        "@netlify/vite-plugin-react-router": "^2.0.1",
         "@radix-ui/react-slot": "^1.2.3",
         "@react-router/node": "^7.9.2",
         "@react-router/serve": "^7.9.2",
@@ -154,6 +155,8 @@
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.31", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.1.0", "@jridgewell/sourcemap-codec": "^1.4.14" } }, "sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw=="],
 
     "@mjackson/node-fetch-server": ["@mjackson/node-fetch-server@0.2.0", "", {}, "sha512-EMlH1e30yzmTpGLQjlFmaDAjyOeZhng1/XCd7DExR8PNAnG/G1tyruZxEoUe11ClnwGhGrtsdnyyUx1frSzjng=="],
+
+    "@netlify/vite-plugin-react-router": ["@netlify/vite-plugin-react-router@2.0.1", "", { "dependencies": { "isbot": "^5.0.0" }, "peerDependencies": { "react-router": ">=7.9.0", "vite": ">=5.0.0" } }, "sha512-1sEVt21drlRcMA9PY0VIBGo5t9AfDQWo94ifnSoWt3EtfXtoOEjTv9v/GgJO6imOv/XGlZzA4udBKbkvsa5hfg=="],
 
     "@npmcli/git": ["@npmcli/git@4.1.0", "", { "dependencies": { "@npmcli/promise-spawn": "^6.0.0", "lru-cache": "^7.4.4", "npm-pick-manifest": "^8.0.0", "proc-log": "^3.0.0", "promise-inflight": "^1.0.1", "promise-retry": "^2.0.1", "semver": "^7.3.5", "which": "^3.0.0" } }, "sha512-9hwoB3gStVfa0N31ymBmrX+GuDGdVA/QWShZVqE0HK2Af+7QGGrCTbZia/SW0ImUTjTne7SP91qxDmtXvDHRPQ=="],
 

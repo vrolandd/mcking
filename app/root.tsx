@@ -33,12 +33,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <nav className="sticky top-0 w-full flex justify-center bg-accent border-b-2 border-b-neutral-600">
+        <nav className="sticky top-0 w-full flex justify-center bg-accent border-b-2 border-b-neutral-600 px-6">
           <div className="flex items-center max-w-7xl w-full py-4">
             <h1 className="text-2xl">McKing</h1>
           </div>
         </nav>
-        {children}
+
+        <div className="flex flex-col items-center px-6">
+          {children}
+        </div>
+        
         <ScrollRestoration />
         <Scripts />
       </body>
