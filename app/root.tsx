@@ -25,7 +25,7 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="hu" className="dark">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -33,6 +33,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        <nav className="sticky top-0 w-full flex justify-center bg-accent border-b-2 border-b-neutral-600">
+          <div className="flex items-center max-w-7xl w-full py-4">
+            <h1 className="text-2xl">McKing</h1>
+          </div>
+        </nav>
         {children}
         <ScrollRestoration />
         <Scripts />
