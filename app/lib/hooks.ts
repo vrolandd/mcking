@@ -23,7 +23,7 @@ export const useCart = () => {
 
             if (existingItemIndex !== -1) {
                 const updatedCart = [...prevCart];
-                updatedCart[existingItemIndex].quantity = updatedCart[existingItemIndex].quantity + quantity / 2;
+                updatedCart[existingItemIndex].quantity += quantity;
                 return updatedCart;
             } else {
                 return [...prevCart, { Product: product, quantity }];
