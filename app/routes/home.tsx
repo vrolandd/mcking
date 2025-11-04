@@ -26,102 +26,158 @@ export default function Home() {
 
   const { cart, addToCart, removeFromCart, clearCart } = useCart();
 
-  return (
-    <main className="flex flex-col max-w-7xl w-full mx-auto">
-      <h2 className="text-3xl mt-8 mb-4">Üdv!</h2>
+  const totalPrice = cart.reduce((total, item) => total + (item.Product.price * item.quantity), 0);
 
-      <div className="flex gap-5 flex-1 max-md:flex-col">
-        <div className="flex-1 flex flex-col">
-          <h3 className="text-2xl mb-4">Termékek</h3>
-          {
-            products.error ? (
-              <p className="text-red-500">Error loading products: {products.error.message}</p>
+  return (
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 py-8 max-w-7xl w-full" >
+        {/* Header */}
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold text-foreground mb-2">Üdvözöljük!</h1>
+          <p className="text-xl text-muted-foreground">Válasszon kedvenc termékeinkből</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Products Section */}
+          <div className="lg:col-span-3">
+            <div className="mb-6">
+              <h2 className="text-2xl font-semibold text-foreground">Termékeink</h2>
+              <div className="h-1 w-20 bg-primary rounded-full mt-2"></div>
+            </div>
+            
+            {products.error ? (
+              <Card className="p-8">
+                <div className="text-center">
+                  <p className="text-destructive text-lg">Hiba a termékek betöltése során</p>
+                  <p className="text-muted-foreground mt-2">{products.error.message}</p>
+                </div>
+              </Card>
             ) : (
-              <section className="flex flex-wrap gap-4 max-md:justify-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {products.data?.map(product => (
-                  <Card className="max-w-xs w-full pt-0 overflow-hidden" key={product.id}>
-                    {
-                      product.image_url && (
+                  <Card key={product.id} className="pt-0 group hover:shadow-lg transition-all duration-300 overflow-hidden border-0 shadow-md">
+                    {product.image_url && (
+                      <div className="relative overflow-hidden">
                         <img
                           src={product.image_url}
                           alt={product.name}
-                          className="h-48 w-full object-cover bg-muted"
+                          className="h-48 w-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
-                      )
-                    }
-                    <CardHeader>
-                      <CardTitle className="text-xl">
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+                      </div>
+                    )}
+                    
+                    <CardHeader >
+                      <CardTitle className="text-lg font-semibold line-clamp-1">
                         {product.name}
                       </CardTitle>
                     </CardHeader>
 
-                    <CardContent>
-                      <p className="text-muted-foreground">{product.description}</p>
-                      <p className="mt-4 font-bold">{product.price} Ft</p>
+                    <CardContent className="pb-4 -mt-4">
+                      <p className="text-muted-foreground text-sm line-clamp-2 mb-4">
+                        {product.description}
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-2xl font-bold text-primary">
+                          {product.price.toLocaleString()} Ft
+                        </span>
+                      </div>
                     </CardContent>
 
                     <CardFooter>
                       <Button
                         onClick={() => addToCart(product, 1)}
+                        className="w-full group-hover:bg-primary/90 transition-colors"
+                        size="lg"
                       >
-                        Kosárba
+                        Kosárba helyezés
                       </Button>
                     </CardFooter>
                   </Card>
                 ))}
-              </section>
-            )
-          }
-        </div>
-
-
-        <Card className="w-xs sticky top-20 h-full max-md:w-full">
-          <CardHeader>
-            <CardTitle>Kosár</CardTitle>
-          </CardHeader>
-
-          <CardContent>
-            {
-              cart.length === 0 ? (
-                <p>A kosár üres.</p>
-              ) : (
-                <ul>
-                  {cart.map(item => (
-                    <li key={item.Product.id} className="mb-4">
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <p className="font-bold">{item.Product.name}</p>
-                          <p>Mennyiség: {item.quantity}</p>
-                          <p>Ár: {item.Product.price * item.quantity} Ft</p>
-                        </div>
-                        <Button
-                          variant="destructive"
-                          size="sm"
-                          onClick={() => removeFromCart(item.Product.id)}
-                        >
-                          Eltávolít
-                        </Button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              )
-            }
-          </CardContent>
-
-          <CardFooter>
-            {cart.length > 0 && (
-              <Link to="/checkout">
-                <Button
-                  className="mt-4 w-full"
-                >
-                  Rendelés leadása
-                </Button>
-              </Link>
+              </div>
             )}
-          </CardFooter>
-        </Card>
+          </div>
+
+          {/* Cart Section */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-6">
+              <Card className="shadow-lg border-0">
+                <CardHeader className="pb-4">
+                  <CardTitle className="flex items-center justify-between text-xl">
+                    <span>Kosár</span>
+                    {cart.length > 0 && (
+                      <span className="bg-primary text-primary-foreground text-sm px-2 py-1 rounded-full">
+                        {cart.length}
+                      </span>
+                    )}
+                  </CardTitle>
+                </CardHeader>
+
+                <CardContent className="pb-4">
+                  {cart.length === 0 ? (
+                    <div className="text-center py-8">
+                      <div className="text-muted-foreground mb-2">🛒</div>
+                      <p className="text-muted-foreground">A kosár üres</p>
+                      <p className="text-sm text-muted-foreground/70 mt-1">
+                        Válasszon termékeket a hozzáadáshoz
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      {cart.map(item => (
+                        <div key={item.Product.id} className="flex items-start gap-3 p-3 bg-muted/50 rounded-lg">
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium text-sm line-clamp-1 mb-1">
+                              {item.Product.name}
+                            </p>
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <span>{item.quantity}x</span>
+                              <span>{item.Product.price} Ft</span>
+                            </div>
+                            <p className="text-sm font-semibold mt-1">
+                              {(item.Product.price * item.quantity).toLocaleString()} Ft
+                            </p>
+                          </div>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => removeFromCart(item.Product.id)}
+                            className="text-destructive hover:text-destructive hover:bg-destructive/10 h-8 w-8 p-0"
+                          >
+                            ×
+                          </Button>
+                        </div>
+                      ))}
+                      
+                      {cart.length > 0 && (
+                        <div className="border-t pt-4 mt-4">
+                          <div className="flex justify-between items-center mb-4">
+                            <span className="font-semibold">Összesen:</span>
+                            <span className="text-xl font-bold text-primary">
+                              {totalPrice.toLocaleString()} Ft
+                            </span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </CardContent>
+
+                {cart.length > 0 && (
+                  <CardFooter className="pt-0">
+                    <Link to="/checkout" className="w-full">
+                      <Button className="w-full" size="lg">
+                        Rendelés leadása
+                      </Button>
+                    </Link>
+                  </CardFooter>
+                )}
+              </Card>
+            </div>
+          </div>
+        </div>
       </div>
-    </main>
+    </div>
   );
 }

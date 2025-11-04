@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export type CartItem = {
     Product: {
@@ -13,7 +13,7 @@ export type CartItem = {
 }
 
 export const useCart = () => {
-    const [cart, setCart] = useState<CartItem[]>([]);
+    const [cart, setCart] = useState<CartItem[]>(JSON.parse(typeof localStorage !== "undefined" ? localStorage.getItem("cart") || "[]" : "[]"));
 
     const addToCart = (product: CartItem["Product"], quantity: number) => {
         setCart((prevCart) => {
@@ -23,7 +23,7 @@ export const useCart = () => {
 
             if (existingItemIndex !== -1) {
                 const updatedCart = [...prevCart];
-                updatedCart[existingItemIndex].quantity += quantity;
+                updatedCart[existingItemIndex].quantity = updatedCart[existingItemIndex].quantity + quantity / 2;
                 return updatedCart;
             } else {
                 return [...prevCart, { Product: product, quantity }];
@@ -40,6 +40,10 @@ export const useCart = () => {
     const clearCart = () => {
         setCart([]);
     }
+
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cart));
+    }, [cart]);
 
     return {
         cart,

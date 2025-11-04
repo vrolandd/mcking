@@ -1,5 +1,6 @@
 import {
   isRouteErrorResponse,
+  Link,
   Links,
   Meta,
   Outlet,
@@ -9,6 +10,7 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { Toaster } from "./components/ui/sonner";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -35,16 +37,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <body>
         <nav className="sticky top-0 w-full flex justify-center bg-accent border-b-2 border-b-neutral-600 px-6">
           <div className="flex items-center max-w-7xl w-full py-4">
-            <h1 className="text-2xl">McKing</h1>
+            <Link to="/">
+              <h1 className="text-2xl">McKing</h1>
+            </Link>
           </div>
         </nav>
 
         <div className="flex flex-col items-center px-6">
           {children}
         </div>
-        
+
         <ScrollRestoration />
         <Scripts />
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   );
