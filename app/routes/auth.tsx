@@ -94,11 +94,11 @@ export default function AuthPage() {
                                 <div className="grid gap-4">
                                     <div className="grid gap-2">
                                         <Label htmlFor="email-signin">Email</Label>
-                                        <Input id="email-signin" name="email" type="email" placeholder="you@example.com" required />
+                                        <Input id="email-signin" name="email" type="email" placeholder="john.doe@example.com" required />
                                     </div>
                                     <div className="grid gap-2">
                                         <Label htmlFor="password-signin">Jelszó</Label>
-                                        <Input id="password-signin" name="password" type="password" required />
+                                        <Input id="password-signin" name="password" type="password" placeholder="********" required />
                                     </div>
                                     {actionData?.error && (
                                         <p className="text-sm text-red-600" role="alert">
@@ -118,11 +118,11 @@ export default function AuthPage() {
                                 <div className="grid gap-4">
                                     <div className="grid gap-2">
                                         <Label htmlFor="email-signup">Email</Label>
-                                        <Input id="email-signup" name="email" type="email" placeholder="you@example.com" required />
+                                        <Input id="email-signup" name="email" type="email" placeholder="john.doe@example.com" required />
                                     </div>
                                     <div className="grid gap-2">
                                         <Label htmlFor="password-signup">Jelszó</Label>
-                                        <Input id="password-signup" name="password" type="password" required />
+                                        <Input id="password-signup" name="password" type="password" placeholder="********" required />
                                     </div>
                                     {actionData?.error && (
                                         <p className="text-sm text-red-600" role="alert">

@@ -173,7 +173,7 @@ export default function AdminPage() {
                   <TableHead>Összeg</TableHead>
                   <TableHead>Státusz</TableHead>
                   <TableHead>Dátum</TableHead>
-                  <TableHead>Műveletek</TableHead>
+                  {/* <TableHead>Műveletek</TableHead> */}
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -200,7 +200,7 @@ export default function AdminPage() {
                       </Badge>
                     </TableCell>
                     <TableCell>{formatDate(order.created_at)}</TableCell>
-                    <TableCell>
+                    {/* <TableCell>
                       <div className="flex gap-2">
                         <Button variant="outline" size="sm">
                           Megtekint
@@ -209,7 +209,7 @@ export default function AdminPage() {
                           Státusz frissítés
                         </Button>
                       </div>
-                    </TableCell>
+                    </TableCell> */}
                   </TableRow>
                 ))}
               </TableBody>
